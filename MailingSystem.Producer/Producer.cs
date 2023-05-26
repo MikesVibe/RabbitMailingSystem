@@ -1,4 +1,4 @@
-﻿using MailingSystem.Producer.Models;
+﻿using MailingSystem.Model.Model;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
 using System;

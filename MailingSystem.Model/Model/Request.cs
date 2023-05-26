@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MailingSystem.Producer.Models
+namespace MailingSystem.Model.Model
 {
     public class Request
     {
