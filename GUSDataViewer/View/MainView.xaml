@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="GUSDataViewer.View.MainView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GUSDataViewer.View"
+             mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <SolidColorBrush x:Key="GreenBrush" Color="Green" />
+        <SolidColorBrush x:Key="YellowBrush" Color="Yellow" />
+        <SolidColorBrush x:Key="RedBrush" Color="Red" />
+    </UserControl.Resources>
+    <Grid>
+        <DataGrid Grid.Row="1" VerticalAlignment="Top" Margin="20" HorizontalScrollBarVisibility="Disabled" 
+            CanUserAddRows="False" CanUserResizeRows="False" IsReadOnly="False" SelectionMode="Single"
+            ItemsSource="{Binding Areas, Mode=TwoWay}"
+            SelectedItem="{Binding  SelectedArea, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            AutoGenerateColumns="False" FontSize="11" Width="950"
+            VirtualizingStackPanel.IsVirtualizing="True">
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding LevelName}" Value="Temat">
+                            <Setter Property="Background" Value="{StaticResource GreenBrush}" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding LevelName}" Value="Zakres informacyjny">
+                            <Setter Property="Background" Value="{StaticResource YellowBrush}" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding LevelName}" Value="Dziedzina">
+                            <Setter Property="Background" Value="{StaticResource RedBrush}" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.RowStyle>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Width="50"
+                            Binding="{Binding Id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Header="Nazwa" Width="500"
+                            Binding="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Header="Nadrzedny Element Id" Width="120"
+                            Binding="{Binding ParentElementId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Header="Poziom Id" Width="60"
+                            Binding="{Binding LevelId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Header="Poziom Nazwa" Width="120"
+                            Binding="{Binding LevelName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Header="Czy zmienne" Width="*"
+                            Binding="{Binding IsChanged, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>
