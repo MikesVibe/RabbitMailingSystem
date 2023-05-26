@@ -62,7 +62,6 @@ public class Consumer
 
         string consumerTag = channel.BasicConsume(queueName, false, consumer);
 
-        Console.WriteLine("Waiting for mails...");
         Console.ReadLine();
 
         channel.BasicCancel(consumerTag); 

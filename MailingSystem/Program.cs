@@ -3,18 +3,19 @@ using MailingSystem.Producer;
 using RabbitMQ.Client.Exceptions;
 
 // Setting endless loop for sending messages via MailingSystem.Producer library
-while (true)
+for (int idx=0; idx > -1; idx++)
 {
     var mail = new Mail
     {
-        Subject = "RabitMQ Test",
-        Body = "Welcome to the hotel california",
-        Recipient = "programisci@militaria.pl"
+        Recipient = "programisci@militaria.pl",
+        Subject = $"RabitMQ Test - [{idx}]",
+        Body = "Welcome to the hotel california"
     };
 
     var request = new Request
     {
-        RequestedMailingServiceName = "FakeSMTPMailingService",
+        //Switching services when idx can be divded by 2
+        RequestedMailingServiceName = (idx%2 == 0) ? "FakeSMTPMailingService" : "FakeIMAPMailingService",
         Mail = mail
     };
 
@@ -27,7 +28,5 @@ while (true)
     {
         Console.WriteLine("Something went wrong while trying to connect with RabitMQ.");
     }
-
-    Console.WriteLine("Press any key to continue...");
-    Console.ReadKey();
+    Thread.Sleep(3000);
 }

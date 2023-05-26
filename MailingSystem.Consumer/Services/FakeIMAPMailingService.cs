@@ -7,13 +7,15 @@ using System.Threading.Tasks;
 
 namespace MailingSystem.Consumer.Services
 {
-    public class FakeSMTPMailingService : IMailingService
+    public class FakeIMAPMailingService : IMailingService
     {
         public bool SendMail(Mail email)
         {
             Console.WriteLine("-------------------------");
-            Console.WriteLine($"Mail sent through {nameof(FakeSMTPMailingService)}.");
-            Console.WriteLine("Mail sent: Subject={0}, Recipient={1}", email.Subject, email.Recipient);
+            Console.WriteLine($"Mail sent through {nameof(FakeIMAPMailingService)}.");
+            Console.WriteLine($"To: {email.Recipient}");
+            Console.WriteLine($"Subject: {email.Subject}");
+            Console.WriteLine($"Body: {email.Body}");
             Console.WriteLine("-------------------------");
 
             return true;
